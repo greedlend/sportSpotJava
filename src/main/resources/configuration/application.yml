@@ -1,0 +1,42 @@
+spring:
+ profiles:
+  active: ${profiles.active}
+#  include: db
+
+graphql:
+ servlet:
+  maxQueryDepth: 10
+  exception-handlers-enabled: false
+  mapping: /graphql
+  enabled: true
+  corsEnabled: false
+  cors:
+   allowed-origins: http://localhost:8080/
+  # if you want to @ExceptionHandler annotation for custom GraphQLErrors
+  contextSetting: PER_REQUEST_WITH_INSTRUMENTATION
+  tracingEnabled: true
+ tools:
+  schema-location-pattern: "graphQL/*.graphqls"
+  introspection-enabled: true
+ playground:
+  settings:
+   prettier:
+    use-tabs: false
+
+voyager:
+ cdn:
+  enabled: false
+ enabled: false
+
+graphql.playground:
+ headers:
+  headerFor: AllTabs
+ tabs:
+ - name: Example Tab
+   query: classpath:graphQL/userbase.graphqls
+#   headers:
+#    SomeHeader: Some value
+#   variables: classpath:graphQL/variables.json
+   responses:
+#   - classpath:graphQL/exampleResponse1.json
+#   - classpath:graphQL/exampleResponse2.json

@@ -1,0 +1,6 @@
+type Organization @key(fields: "uuid"){
+    uuid: String!
+    name: String
+    upper: Organization
+    owner: UserBase
+}

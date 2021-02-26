@@ -1,0 +1,52 @@
+scalar DateTime
+
+type UserBase @key(fields: "uuid"){
+    uuid: String!
+    username: String!
+    password: String!
+    email: String
+    createTime: DateTime!
+    upper: UserBase
+    userExtends: UserExtends
+    organization: Organization
+    balance: Float
+}
+
+type UserBaseConnection {
+    edges: [UserBaseEdge]
+    pageInfo: PageInfo!
+}
+
+type UserBaseEdge {
+    cursor: String!
+    node: UserBase
+}
+
+type UserExtends @key(fields: "uuid"){
+    uuid: String!
+    address: String
+    title: String
+}
+
+type PageInfo {
+        isHasPreviousPage: Boolean
+        isHasNextPage: Boolean
+        startCursor: String
+        endCursor: String
+      }
+
+type Query {
+    findAllUserBases: [UserBase!]
+    pageAllUserBases(first: Int, after: String, before: String, last: Int): UserBaseConnection #@connection (for: "UserBase")
+    count: Int!
+    userBase(uuid: String): UserBase!
+    getDataFetcherResult(uuid: String): UserBase!
+    executorGet(uuid: String): UserBase!
+
+    organization(uuid: String): Organization!
+    findAllOrganizations: [Organization!]
+}
+
+type Mutation {
+    newUserBase(input: UserBaseInput!) : UserBase!
+}

@@ -1,0 +1,5 @@
+profiles:
+ active: dev
+test1026:
+ host: hostdev
+ name: namedev

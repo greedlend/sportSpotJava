@@ -1,0 +1,3 @@
+db:
+  url: 'http://localhost:3306/'
+  name: 'dev-db'

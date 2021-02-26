@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test_hytech01?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  http:encoding:
+    force: true
+  jpa:
+    open-in-view: true
+    #true, database queries may be performed during view rendering
+
