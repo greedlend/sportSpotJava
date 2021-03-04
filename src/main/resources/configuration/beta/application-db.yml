@@ -15,8 +15,8 @@ spring:
   datasource:
    initialization-mode: always
    platform: postgres
-   url: jdbc:postgresql://localhost:5432/mydb
-   username: postgres
+   url: jdbc:postgresql://localhost:5432/greedlendTest
+   username: greedlend
    password: postgres18
 
   jpa:
