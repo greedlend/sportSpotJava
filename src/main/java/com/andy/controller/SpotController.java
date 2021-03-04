@@ -21,7 +21,7 @@ public class SpotController {
     @Autowired
     private BaseConfiguration baseConfig;
 
-    @RequestMapping(value= "/gateway")
+    @RequestMapping(value= "/list")
     public String gateWay() {
         Properties properties = System.getProperties();
         properties.list(System.out);

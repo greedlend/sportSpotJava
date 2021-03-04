@@ -19,7 +19,7 @@ public class Application {
         Jedis jedis = new Jedis();
 //        jedis.hset
 //        jedis.setnx();
-        jedis.unlink("key");
+//        jedis.unlink("key");
         SpringApplication.run(Application.class, args);
     }
 }
