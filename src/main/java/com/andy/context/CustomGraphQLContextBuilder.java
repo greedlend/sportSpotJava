@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.Session;
 import javax.websocket.server.HandshakeRequest;
+import java.util.UUID;
 
 /**
  * @Author: Lim, Andy
@@ -34,7 +35,7 @@ public class CustomGraphQLContextBuilder implements GraphQLServletContextBuilder
         DefaultGraphQLServletContext context = DefaultGraphQLServletContext.createServletContext()
                 .with(httpServletRequest)
                 .with(httpServletResponse)
-                .with(dataLoaderRegistryFactory.create(userId))
+                .with(dataLoaderRegistryFactory.create(UUID.fromString(userId)))
                 .build();
 
         return new CustomGraphQLContext(userId, context);

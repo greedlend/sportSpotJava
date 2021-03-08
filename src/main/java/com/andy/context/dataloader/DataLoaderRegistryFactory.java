@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -27,7 +28,7 @@ public class DataLoaderRegistryFactory {
 
     private final BalanceService balanceService;
 
-    public DataLoaderRegistry create(String uuid) {
+    public DataLoaderRegistry create(UUID uuid) {
 
         DataLoaderRegistry registry = new DataLoaderRegistry();
 
@@ -36,8 +37,8 @@ public class DataLoaderRegistryFactory {
         return registry;
     }
 
-    private DataLoader<String, BigDecimal> createBalanceDataLoarder(String uuid) {
-        return DataLoader.newMappedDataLoader((Set<String> userBaseIds) ->
+    private DataLoader<UUID, BigDecimal> createBalanceDataLoarder(UUID uuid) {
+        return DataLoader.newMappedDataLoader((Set<UUID> userBaseIds) ->
             CompletableFuture.supplyAsync(() -> balanceService.getBalanceFor(userBaseIds, uuid), threadPool));
     }
 }
