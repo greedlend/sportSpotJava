@@ -9,10 +9,10 @@ import java.util.UUID;
  */
 public class GeneratorUtils {
 
-    public static final String generateUUID() {
+    public static final UUID generateUUID() {
 
         UUID uuid = UUID.randomUUID();
-        return uuid.toString();
+        return uuid;
     }
 
     public static final String generateTempPassword() {
