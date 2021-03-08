@@ -17,12 +17,12 @@ import java.util.UUID;
 public class UserExtends {
 
     @Id
-    @Column(name = "uuid", nullable = false)
+//    @Column(name = "uuid", nullable = false)
     private UUID uuid;
 
-    @Column(name = "address")
+//    @Column(name = "address")
     private String address;
 
-    @Column(name = "title")
+//    @Column(name = "title")
     private String title;
 }

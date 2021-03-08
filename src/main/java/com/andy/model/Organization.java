@@ -15,10 +15,10 @@ import java.util.UUID;
 public class Organization {
 
     @Id
-    @Column(name = "uuid", nullable = false)
+//    @Column(name = "uuid", nullable = false)
     private UUID uuid;
 
-    @Column(name = "name")
+//    @Column(name = "name")
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)

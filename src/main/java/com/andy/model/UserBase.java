@@ -32,19 +32,19 @@ import java.util.UUID;
 public class UserBase implements Serializable {
 
     @Id
-    @Column(name = "uuid", nullable = false)
+//    @Column(name = "uuid", nullable = false)
     private UUID uuid;
 
-    @Column(name = "username", nullable = false)
+//    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "email")
+//    @Column(name = "email")
     private String email;
 
-    @Column(name = "password", nullable = false)
+//    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "create_time", nullable = false)
+//    @Column(name = "create_time", nullable = false)
     private ZonedDateTime createTime;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -53,12 +53,12 @@ public class UserBase implements Serializable {
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "user_extends_relate", referencedColumnName = "uuid")
-    @Column(name = "user_extends_relate")
+//    @Column(name = "user_extends_relate")
     private UUID userExtendsRelate;
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "org_relate", referencedColumnName = "uuid")
-    @Column(name = "org_relate")
+//    @Column(name = "org_relate")
     private UUID orgRelate;
 
     /**
