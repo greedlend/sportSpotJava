@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.UUID;
 
 /**
  * @Author: Lim, Andy
@@ -17,7 +18,7 @@ public class UserExtends {
 
     @Id
     @Column(name = "uuid", nullable = false)
-    private String uuid;
+    private UUID uuid;
 
     @Column(name = "address")
     private String address;

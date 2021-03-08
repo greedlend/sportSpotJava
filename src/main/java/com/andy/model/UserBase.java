@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 /**
  * @Author: Lim, Andy
@@ -32,7 +33,7 @@ public class UserBase implements Serializable {
 
     @Id
     @Column(name = "uuid", nullable = false)
-    private String uuid;
+    private UUID uuid;
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -53,12 +54,12 @@ public class UserBase implements Serializable {
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "user_extends_relate", referencedColumnName = "uuid")
     @Column(name = "user_extends_relate")
-    private String userExtendsRelate;
+    private UUID userExtendsRelate;
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "org_relate", referencedColumnName = "uuid")
     @Column(name = "org_relate")
-    private String orgRelate;
+    private UUID orgRelate;
 
     /**
      * 另外賦予前端的資料
