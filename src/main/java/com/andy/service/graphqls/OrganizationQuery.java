@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @Author: Lim, Andy
@@ -22,7 +23,7 @@ public class OrganizationQuery implements GraphQLQueryResolver {
     @Autowired
     private OrganizationService organizationService;
 
-    public Organization organization(String uuid) {
+    public Organization organization(UUID uuid) {
         return this.organizationService.getOrganization(uuid);
     }
 

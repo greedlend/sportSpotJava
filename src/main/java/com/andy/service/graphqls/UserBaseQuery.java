@@ -24,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -52,7 +53,7 @@ public class UserBaseQuery implements GraphQLQueryResolver {
         return null != this.userBaseService.count()? this.userBaseService.count().intValue(): 0;
     }
 
-    public UserBase userBase(String id, DataFetchingEnvironment dataFetchingEnvironment) {
+    public UserBase userBase(UUID id, DataFetchingEnvironment dataFetchingEnvironment) {
         log.info("DataFetchingEnvironment ...");
 
         CustomGraphQLContext customGraphQLContext = dataFetchingEnvironment.getContext();
@@ -91,7 +92,7 @@ public class UserBaseQuery implements GraphQLQueryResolver {
          * */
         List<Edge<UserBase>> edgeList= userBaseList
                 .stream()
-                .map(userBase -> new DefaultEdge<>(userBase, cursorUtil.from(userBase.getUuid())))
+                .map(userBase -> new DefaultEdge<>(userBase, cursorUtil.from(userBase.getUuid().toString())))
                 .limit(limit)
                 .collect(Collectors.toList());
 
@@ -160,7 +161,7 @@ public class UserBaseQuery implements GraphQLQueryResolver {
         return this.userBaseService.findAllUserBasesAfter(pageArgsMap);
     }
 
-    public DataFetcherResult<UserBase> getDataFetcherResult(String id) {
+    public DataFetcherResult<UserBase> getDataFetcherResult(UUID id) {
 
 //        throw new RuntimeException("customized exception error");
         /**
@@ -178,7 +179,7 @@ public class UserBaseQuery implements GraphQLQueryResolver {
      * */
     private final ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
-    public CompletableFuture<UserBase> executorGet(String id) {
+    public CompletableFuture<UserBase> executorGet(UUID id) {
         return CompletableFuture.supplyAsync(
                 () -> {
                     return this.userBaseService.getUserBase(id);

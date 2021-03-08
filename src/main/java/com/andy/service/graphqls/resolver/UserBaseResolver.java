@@ -9,6 +9,7 @@ import org.dataloader.DataLoader;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -23,7 +24,7 @@ public class UserBaseResolver implements GraphQLResolver<UserBase> {
     public CompletableFuture<BigDecimal> balance(UserBase userBase, DataFetchingEnvironment environment) throws InterruptedException {
 
         log.info("User:{}, get balance", userBase.getUsername());
-        DataLoader<String, BigDecimal> dataLoader = environment.getDataLoader(DataLoaderRegistryFactory.BALANCE_DATA_LOADER);
+        DataLoader<UUID, BigDecimal> dataLoader = environment.getDataLoader(DataLoaderRegistryFactory.BALANCE_DATA_LOADER);
         return dataLoader.load(userBase.getUuid());
     }
 }

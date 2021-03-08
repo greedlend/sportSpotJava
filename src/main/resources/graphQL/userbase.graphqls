@@ -1,4 +1,5 @@
 scalar DateTime
+scalar Uuid
 
 type UserBase @key(fields: "uuid"){
     uuid: String!
