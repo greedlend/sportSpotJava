@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @Author: Lim, Andy
@@ -25,13 +26,13 @@ public class OrganizationService {
     @Transactional(readOnly = true)
     public Organization getOrganization(UserBase userBase) {
         Optional<Organization> result =
-                Strings.isBlank(userBase.getOrgRelate())? Optional.ofNullable(null):this.organizationRepository.findById(userBase.getOrgRelate());
+                null == userBase.getOrgRelate()? Optional.ofNullable(null):this.organizationRepository.findById(userBase.getOrgRelate());
         if(!result.isPresent()) {return null;}
         return result.get();
     }
 
     @Transactional(readOnly = true)
-    public Organization getOrganization(String uuid) {
+    public Organization getOrganization(UUID uuid) {
         return this.organizationRepository.findById(uuid).get();
     }
 

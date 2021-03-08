@@ -22,6 +22,7 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @Author: Lim, Andy
@@ -43,11 +44,12 @@ public class UserBaseService {
             return null;
         }
 
-        String id = GeneratorUtils.generateUUID();
+//        String id = GeneratorUtils.generateUUID();
+        UUID id = GeneratorUtils.generateUUID();
         String tempPwd = GeneratorUtils.generateTempPassword();
         ZonedDateTime createTime = ZonedDateTime.now(clock);
 
-        UserBase upperUserBase = !Strings.isBlank(userBaseInput.getUpperId())? userBaseRepository.getOne(userBaseInput.getUpperId()): null;
+        UserBase upperUserBase = !Strings.isBlank(userBaseInput.getUpperId())? userBaseRepository.getOne(UUID.fromString(userBaseInput.getUpperId())): null;
 
         UserBase userBase = new UserBase();
         userBase.setUuid(id);
@@ -90,7 +92,7 @@ public class UserBaseService {
         List<Predicate> predicates = new ArrayList<>();
         if (null != cursor) {
             if(direction == Pagination.NEXT_PAGE.value()) {
-                predicates.add(cb.greaterThan(root.get("uuid"), cursor));
+                predicates.add(cb.greaterThan(root.get("uuid"), UUID.fromString(cursor)));
             }else if(direction == Pagination.PREVIOUS_PAGE.value()) {
                 predicates.add(cb.lessThan(root.get("uuid"), cursor));
             }
@@ -107,7 +109,7 @@ public class UserBaseService {
     }
 
     @Transactional(readOnly = true)
-    public UserBase getUserBase(String id) {
+    public UserBase getUserBase(UUID id) {
         return this.userBaseRepository.findById(id).get();
     }
 }

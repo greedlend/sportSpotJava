@@ -5,11 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 /**
  * @Author: Lim, Andy
  * @Date: 2020/10/29
  * @Proposal:
  */
 @Repository
-public interface UserBaseRepository extends JpaRepository<UserBase, String>, JpaSpecificationExecutor {
+public interface UserBaseRepository extends JpaRepository<UserBase, UUID>, JpaSpecificationExecutor {
 }

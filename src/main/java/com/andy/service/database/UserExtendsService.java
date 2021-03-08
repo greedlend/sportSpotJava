@@ -24,7 +24,7 @@ public class UserExtendsService {
     @Transactional(readOnly = true)
     public UserExtends getUserExtends(UserBase userBase) {
         Optional<UserExtends> result =
-                Strings.isBlank(userBase.getUserExtendsRelate()) ? Optional.ofNullable(null):this.userExtendsRepository.findById(userBase.getUserExtendsRelate());
+                null == userBase.getUserExtendsRelate() ? Optional.ofNullable(null):this.userExtendsRepository.findById(userBase.getUserExtendsRelate());
         if(!result.isPresent()) {return null;}
         return result.get();
     }
