@@ -16,6 +16,8 @@ public class PlayerController {
     @RequestMapping(value= "/plusInSpot")
     public String gateWay() {
         logger.info("adds one in spot");
+
+
         return "";
     }
 }
