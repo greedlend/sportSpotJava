@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,7 +16,7 @@ public class Spot implements Serializable {
     @Id
     private UUID uuid;
 
-    private Integer noPlayers;
+    private Integer playersNumber;
 
     private String address;
 
@@ -26,4 +27,5 @@ public class Spot implements Serializable {
     private Boolean isOpen;
 
     private Boolean isDel;
+
 }
