@@ -75,6 +75,8 @@ public class SpotServiceImpl implements SpotService{
 
         if(!Arrays.stream(sortBy.split(",")).allMatch(element -> element.equals("asc") || element.equals("desc"))) {
 //            throws new Exception("sss");
+            params.put("code", false);
+            return params;
         }
 
         if(0 < sortBy.split(",").length) {
