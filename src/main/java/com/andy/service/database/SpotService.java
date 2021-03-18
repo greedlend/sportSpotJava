@@ -6,6 +6,7 @@ import com.andy.model.input.SpotInput;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public interface SpotService {
@@ -21,4 +22,8 @@ public interface SpotService {
     Spot updateSpot(Spot spot);
 
     void deleteSpot(UUID uuid);
+
+    List<Spot> list(Map<String, Object> params);
+
+    Map<String, Object> fillUpSearchParams(Map<String, Object> params);
 }

@@ -5,10 +5,10 @@ import com.andy.model.input.SpotInput;
 import com.andy.repository.SpotRepository;
 import com.andy.service.database.SpotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class SpotServiceImpl implements SpotService{
@@ -53,5 +53,41 @@ public class SpotServiceImpl implements SpotService{
     @Override
     public void deleteSpot(UUID uuid) {
         spotRepository.deleteById(uuid);
+    }
+
+    @Override
+    public List<Spot> list(Map<String, Object> params) {
+
+        if(params.containsKey("sort")) {
+            List<Sort.Order> orders = (List<Sort.Order>)params.get("sort");
+            return spotRepository.findAll(Sort.by(orders));
+        }
+        return spotRepository.findAll();
+    }
+
+    @Override
+    public Map<String, Object> fillUpSearchParams(Map<String, Object> args) {
+
+        Map<String, Object> params = new HashMap<>();
+        String sortBy = (String)args.get("sortBy");
+        String direction = (String)args.get("direction");
+
+        if(0 < sortBy.split(",").length) {
+            List<Sort.Order> orders = new ArrayList<>();
+            String[] sortByArray = sortBy.split(",");
+            String[] directionArray = direction.split(",");
+            int index = 0;
+            for (String target : sortByArray) {
+                Sort.Order order = new Sort.Order(
+                        "asc".equals(directionArray[index]) ? Sort.Direction.ASC:Sort.Direction.DESC
+                        , target);
+                orders.add(order);
+                index++;
+            }
+            params.put("sort", orders);
+        }
+
+
+        return params;
     }
 }

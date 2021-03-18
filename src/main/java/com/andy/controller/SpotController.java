@@ -7,10 +7,15 @@ import com.andy.service.database.SpotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -30,11 +35,38 @@ public class SpotController {
     @Autowired
     private SpotService spotService;
 
+
+    /**
+     *
+     * @ResponseBody: Spring treats the result value of the method as the HTTP response body
+     * tells a controller that the object returned is automatically serialized into JSON and passed back into the HttpResponse object.
+     * */
+    @RequestMapping(value= "/listAll")
+    @ResponseBody
+    public List<Spot> listAll() {
+        return spotService.listAll();
+    }
+
+    /**
+     * @RequestBody:
+     *  the @RequestBody annotation maps the HttpRequest body to a transfer or domain object,
+     *  enabling automatic deserialization of the inbound HttpRequest body onto a Java object.
+     *  the type we annotate with the @RequestBody annotation must correspond to the JSON sent from our client-side controller
+     * */
     @RequestMapping(value= "/list")
-    public String gateWay() {
-        Properties properties = System.getProperties();
-        properties.list(System.out);
-        return baseConfig.getHost();
+    public ResponseEntity list(
+            @RequestParam(value = "sortBy", required = true) String sortBy,
+            @RequestParam(value = "direction",required = true) String direction) {
+
+        Map<String,Object> params = new HashMap<>();
+        params.put("sortBy", sortBy);
+        params.put("direction", direction);
+
+        params = spotService.fillUpSearchParams(params);
+
+        List<Spot> result = spotService.list(params);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @RequestMapping(value= "/adds",method = RequestMethod.POST)
