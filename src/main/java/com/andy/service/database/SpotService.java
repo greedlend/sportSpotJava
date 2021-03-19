@@ -1,6 +1,7 @@
 package com.andy.service.database;
 
 
+import com.andy.exceptions.ValidateException;
 import com.andy.model.Spot;
 import com.andy.model.input.SpotInput;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,7 @@ public interface SpotService {
 
     List<Spot> list(Map<String, Object> params);
 
-    Map<String, Object> fillUpSearchParams(Map<String, Object> params) throws Exception;
+    Map<String, Object> fillUpSearchParams(Map<String, Object> params) throws ValidateException;
+
+    void punchSpot(String uuid, Integer playerNumber) throws Exception;
 }

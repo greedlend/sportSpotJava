@@ -19,7 +19,7 @@ public class SpotServiceImpl implements SpotService{
 
     @Override
     public Spot getByUuid(UUID uuid) {
-        return spotRepository.getOne(uuid);
+        return spotRepository.getOne(Optional.of(uuid).get());
     }
 
     @Override
@@ -67,7 +67,7 @@ public class SpotServiceImpl implements SpotService{
     }
 
     @Override
-    public Map<String, Object> fillUpSearchParams(Map<String, Object> args) throws Exception{
+    public Map<String, Object> fillUpSearchParams(Map<String, Object> args) throws ValidateException{
 
         Map<String, Object> params = new HashMap<>();
         String sortBy = (String)args.get("sortBy");
@@ -94,5 +94,24 @@ public class SpotServiceImpl implements SpotService{
 
 
         return params;
+    }
+
+    @Override
+    public void punchSpot(String uuidStr, Integer playerNumber) throws Exception{
+
+        UUID uuid = UUID.fromString(uuidStr);
+        Optional<Spot> opt = Optional.ofNullable(this.getByUuid(uuid));
+        if(opt.isPresent()) {
+            Spot spot = opt.get();
+            spot.setPlayersNumber(spot.getPlayersNumber() + playerNumber);
+            Optional<Spot> result = Optional.ofNullable(this.updateSpot(spot));
+            if(result.isPresent()) {
+                //success
+            }else {
+                throw new ValidateException("punch failed");
+            }
+        }else {
+            throw new ValidateException("No such spot: uuid::" + uuid);
+        }
     }
 }

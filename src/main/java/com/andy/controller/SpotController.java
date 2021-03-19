@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: Lim, Andy
@@ -80,5 +78,22 @@ public class SpotController {
 
         Spot result = spotService.addsSpot(spot);
         return null == result? "failed":"ok";
+    }
+
+    @RequestMapping(value="punch", method = RequestMethod.GET)
+    public ResponseEntity punch(
+            @RequestParam(value = "spotUuid", required = true) String uuid,
+            @RequestParam(value = "playersNumber",required = true) Integer playersNumber) {
+
+        try {
+            spotService.punchSpot(uuid, playersNumber);
+        }catch (Exception validateException) {
+            Arrays.stream(validateException.getStackTrace()).filter(excp -> excp.getClassName().contains(this.getClass().getPackage().getName().substring(0,7)))
+                    .forEach(excp -> log.error(excp.toString()));
+
+            return new ResponseEntity<>("Punch wrongly, plz check the requested parameters. " + validateException.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
