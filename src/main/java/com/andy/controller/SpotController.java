@@ -1,12 +1,13 @@
 package com.andy.controller;
 
 import com.andy.config.BaseConfiguration;
+import com.andy.exceptions.ValidateException;
 import com.andy.model.Spot;
 import com.andy.model.input.SpotInput;
 import com.andy.service.database.SpotService;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * @Author: Lim, Andy
@@ -25,6 +25,7 @@ import java.util.Properties;
  */
 //Spring4之后新加入的注解，原来返回json需要@ResponseBody和@Controller配合。
 //即@RestController 是@ResponseBody和@Controller的组合注解。
+@Log4j2
 @RestController
 @RequestMapping("/spot")
 public class SpotController {
@@ -62,7 +63,12 @@ public class SpotController {
         params.put("sortBy", sortBy);
         params.put("direction", direction);
 
-        params = spotService.fillUpSearchParams(params);
+        try {
+            params = spotService.fillUpSearchParams(params);
+        }catch (Exception validateException){
+            log.error(validateException.getStackTrace()[0]);
+            return new ResponseEntity<>("Plz check the requested parameters. " + validateException.getMessage(), HttpStatus.OK);
+        }
 
         List<Spot> result = spotService.list(params);
 

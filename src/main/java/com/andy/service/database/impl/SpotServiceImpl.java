@@ -1,6 +1,6 @@
 package com.andy.service.database.impl;
 
-import com.andy.exceptions.graphQL.ExceptionHandlerGraphQL;
+import com.andy.exceptions.ValidateException;
 import com.andy.model.Spot;
 import com.andy.model.input.SpotInput;
 import com.andy.repository.SpotRepository;
@@ -67,16 +67,14 @@ public class SpotServiceImpl implements SpotService{
     }
 
     @Override
-    public Map<String, Object> fillUpSearchParams(Map<String, Object> args) {
+    public Map<String, Object> fillUpSearchParams(Map<String, Object> args) throws Exception{
 
         Map<String, Object> params = new HashMap<>();
         String sortBy = (String)args.get("sortBy");
         String direction = (String)args.get("direction");
 
-        if(!Arrays.stream(sortBy.split(",")).allMatch(element -> element.equals("asc") || element.equals("desc"))) {
-//            throws new Exception("sss");
-            params.put("code", false);
-            return params;
+        if(!Arrays.stream(direction.split(",")).allMatch(element -> element.equals("asc") || element.equals("desc"))) {
+            throw new ValidateException("Validate Exception, fillUpSearchParams");
         }
 
         if(0 < sortBy.split(",").length) {

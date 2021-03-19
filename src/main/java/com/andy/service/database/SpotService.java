@@ -25,5 +25,5 @@ public interface SpotService {
 
     List<Spot> list(Map<String, Object> params);
 
-    Map<String, Object> fillUpSearchParams(Map<String, Object> params);
+    Map<String, Object> fillUpSearchParams(Map<String, Object> params) throws Exception;
 }
