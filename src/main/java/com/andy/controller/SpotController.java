@@ -88,9 +88,9 @@ public class SpotController {
         try {
             spotService.punchSpot(uuid, playersNumber);
         }catch (Exception validateException) {
-            Arrays.stream(validateException.getStackTrace()).filter(excp -> excp.getClassName().contains(this.getClass().getPackage().getName().substring(0,7)))
+            Arrays.stream(validateException.getStackTrace())
+                    .filter(excp -> excp.getClassName().contains(this.getClass().getPackage().getName().substring(0,7)))
                     .forEach(excp -> log.error(excp.toString()));
-
             return new ResponseEntity<>("Punch wrongly, plz check the requested parameters. " + validateException.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
