@@ -69,7 +69,7 @@ public class SpotController {
             log.error(validateException.getStackTrace()[0]);
             return new ResponseEntity<>("Plz check the requested parameters. " + validateException.getMessage(), HttpStatus.OK);
         }
-
+        // adds to fetch
         List<Spot> result = spotService.list(params);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
