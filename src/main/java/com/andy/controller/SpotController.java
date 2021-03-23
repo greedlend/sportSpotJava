@@ -1,19 +1,19 @@
 package com.andy.controller;
 
 import com.andy.config.BaseConfiguration;
-import com.andy.exceptions.ValidateException;
 import com.andy.model.Spot;
 import com.andy.model.input.SpotInput;
 import com.andy.service.database.SpotService;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import redis.clients.jedis.Jedis;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -27,6 +27,8 @@ import java.util.*;
 @RestController
 @RequestMapping("/spot")
 public class SpotController {
+
+    private static final String punchKey = "Punch-Spot-";
 
     @Autowired
     private BaseConfiguration baseConfig;
@@ -82,6 +84,35 @@ public class SpotController {
 
     @RequestMapping(value="punch", method = RequestMethod.GET)
     public ResponseEntity punch(
+            @RequestParam(value = "spotUuid", required = true) String uuid,
+            @RequestParam(value = "playersNumber",required = true) Integer playersNumber,
+            HttpServletRequest httpServletRequest) {
+
+        //todo: adds redis to avoid repeating submit
+        HttpSession session = httpServletRequest.getSession();
+        session.getAttribute("test");
+        String redisPunchKey = punchKey + uuid;
+        Jedis jedis = new Jedis();
+        if(null == jedis.get(redisPunchKey)) {
+            jedis.setex(redisPunchKey, 10, Integer.toString(playersNumber));
+        }else {
+            return new ResponseEntity<>("This Spot has been punched within 10 sec, plz hold, or just update this Spot.", HttpStatus.ACCEPTED);
+        }
+
+        try {
+            spotService.punchSpot(uuid, playersNumber);
+        }catch (Exception validateException) {
+            Arrays.stream(validateException.getStackTrace())
+                    .filter(excp -> excp.getClassName().contains(this.getClass().getPackage().getName().substring(0,7)))
+                    .forEach(excp -> log.error(excp.toString()));
+            return new ResponseEntity<>("Punch wrongly, plz check the requested parameters. " + validateException.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @RequestMapping(value="updatePlayers", method = RequestMethod.GET)
+    public ResponseEntity updatePlayers(
             @RequestParam(value = "spotUuid", required = true) String uuid,
             @RequestParam(value = "playersNumber",required = true) Integer playersNumber) {
 
