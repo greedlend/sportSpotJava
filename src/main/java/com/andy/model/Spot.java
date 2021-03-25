@@ -33,6 +33,6 @@ public class Spot {
 
     @Type(type = "pointType")
     private PGpoint geometry;
-//    Latitude and longitude
+//    Latitude = x and longitude = y
 
 }
