@@ -90,9 +90,11 @@ public class SpotController {
 
         //todo: adds redis to avoid repeating submit
         HttpSession session = httpServletRequest.getSession();
+
         session.getAttribute("tests");
         String redisPunchKey = punchKey + uuid;
         Jedis jedis = new Jedis();
+//        jedis.wat
         if(null == jedis.get(redisPunchKey)) {
             jedis.setex(redisPunchKey, 10, Integer.toString(playersNumber));
         }else {

@@ -1,17 +1,18 @@
 package com.andy.model;
 
+import com.andy.config.postgreSQL.PgPointType;
 import lombok.Data;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.postgresql.geometric.PGpoint;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Data
+@TypeDef(name = "pointType", typeClass = PgPointType.class)
 public class Spot {
 
     @Id
@@ -29,5 +30,9 @@ public class Spot {
     private Boolean isOpen;
 
     private Boolean isDel;
+
+    @Type(type = "pointType")
+    private PGpoint geometry;
+//    Latitude and longitude
 
 }
