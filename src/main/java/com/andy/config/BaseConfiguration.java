@@ -1,6 +1,9 @@
 package com.andy.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,11 +11,9 @@ import org.springframework.stereotype.Component;
  * @Date: 2020/10/26
  * @Proposal:
  */
-@Component
+@Configuration
 public class BaseConfiguration {
 
-//    @Value("${testmain.name}")
-//    private String mainName;
 
     @Value("${test1026.host}")
     private String host;
@@ -22,15 +23,6 @@ public class BaseConfiguration {
 
     @Value("${spring.datasource.url}")
     private String dbUrl;
-
-//    public String getMainName() {
-//        return mainName;
-//    }
-//
-//    public void setMainName(String mainName) {
-//        this.mainName = mainName;
-//    }
-
 
     public String getDbUrl() {
         return dbUrl;

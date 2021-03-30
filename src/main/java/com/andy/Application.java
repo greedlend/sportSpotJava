@@ -1,7 +1,9 @@
 package com.andy;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.env.Environment;
 import redis.clients.jedis.Jedis;
 
 import java.util.UUID;
@@ -13,6 +15,7 @@ import java.util.UUID;
  */
 @SpringBootApplication
 public class Application {
+
 
     public static void main(String[] args) {
         int[] intArray = {1, 2, 3};
