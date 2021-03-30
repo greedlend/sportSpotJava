@@ -6,6 +6,7 @@ import com.andy.model.input.SpotInput;
 import com.andy.service.database.SpotService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,9 @@ import java.util.*;
 public class SpotController {
 
     private static final String punchKey = "Punch-Spot-";
+
+    @Autowired
+    private Environment environment;
 
     @Autowired
     private BaseConfiguration baseConfig;
@@ -62,6 +66,8 @@ public class SpotController {
         Map<String,Object> params = new HashMap<>();
         params.put("sortBy", sortBy);
         params.put("direction", direction);
+
+        String[] aa = environment.getDefaultProfiles();
 
         try {
             params = spotService.fillUpSearchParams(params);
