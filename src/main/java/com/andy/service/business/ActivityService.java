@@ -22,6 +22,7 @@ public class ActivityService {
         Spot spot = spotService.getByUuid(spotId);
 
         if(spot != null && spot.getIsOpen()) {
+            //adds validation of open-time
             return true;
         }
 
