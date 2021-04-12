@@ -67,6 +67,7 @@ public class SpotController {
         params.put("sortBy", sortBy);
         params.put("direction", direction);
 
+        // test line
         String[] aa = environment.getDefaultProfiles();
 
         try {
@@ -94,7 +95,6 @@ public class SpotController {
             @RequestParam(value = "playersNumber",required = true) Integer playersNumber,
             HttpServletRequest httpServletRequest) {
 
-        //todo: adds redis to avoid repeating submit
         HttpSession session = httpServletRequest.getSession();
 
         session.getAttribute("test");
