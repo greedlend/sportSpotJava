@@ -40,7 +40,6 @@ public class SpotController {
     @Autowired
     private SpotService spotService;
 
-
     /**
      *
      * @ResponseBody: Spring treats the result value of the method as the HTTP response body
