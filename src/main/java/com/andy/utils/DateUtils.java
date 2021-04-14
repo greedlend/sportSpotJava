@@ -9,19 +9,19 @@ import java.util.Date;
 @Component
 public class DateUtils {
 
-    private SimpleDateFormat getSdf(String format) {
+    private static SimpleDateFormat getSdf(String format) {
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern(format);
         return sdf;
     }
 
-    public Date strToDate(String dateString, String format) throws ParseException {
+    public static Date strToDate(String dateString, String format) throws ParseException {
         SimpleDateFormat sdf = getSdf(format);
         Date result = sdf.parse(dateString);
         return result;
     }
 
-    public String dateToStr(Date date, String format) {
+    public static String dateToStr(Date date, String format) {
         SimpleDateFormat sdf = getSdf(format);
         String result = sdf.format(date);
         return result;
