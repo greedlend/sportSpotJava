@@ -20,4 +20,6 @@ public class AllpayServiceImpl implements DonateService{
     public String directUrl() {
         return null;
     }
+
+    public String checkOrder(){return null;};
 }
