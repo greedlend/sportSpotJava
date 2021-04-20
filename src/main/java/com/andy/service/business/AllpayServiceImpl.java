@@ -13,7 +13,7 @@ public class AllpayServiceImpl implements DonateService{
     @Override
     public String htmlMethod() {
         log.info("override");
-        return null;
+        return "this allpay payment";
     }
 
     @Override

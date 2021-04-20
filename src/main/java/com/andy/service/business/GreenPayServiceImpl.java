@@ -7,7 +7,7 @@ public class GreenPayServiceImpl implements DonateService{
 
     @Override
     public String htmlMethod() {
-        return null;
+        return "this green payment";
     }
 
     @Override
