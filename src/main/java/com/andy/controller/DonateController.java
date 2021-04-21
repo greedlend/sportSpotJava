@@ -32,7 +32,7 @@ public class DonateController {
             donateService = donateDispatchService.getServiceByProvider(provider);
         } catch(ValidateException e) {
             log.error(e.getMessage());
-            return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
 
         String pageHtml = donateService.htmlMethod();
