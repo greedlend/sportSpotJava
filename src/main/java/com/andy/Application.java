@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 import redis.clients.jedis.Jedis;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -24,23 +25,31 @@ public class Application {
         Class clazz = intArray.getClass();
         System.out.println(clazz.getName()); // [I
 
-        List<Spot> list = new ArrayList<>();
-        int i = 0;
-        while(i<5) {
-            int a = i%2;
-            Spot spot = new Spot();
-            spot.setPlayersNumber(a);
-            spot.setAddress("ADR_" + i);
-            list.add(spot);
-            i++;
-        }
+        String courtryDiff = "+3";
 
+        System.out.println(new Date());
+//        TimeZone
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+        System.out.println(sdf.format(new Date()));
+
+//        List<Spot> list = new ArrayList<>();
+//        int i = 0;
+//        while(i<5) {
+//            int a = i%2;
+//            Spot spot = new Spot();
+//            spot.setPlayersNumber(a);
+//            spot.setAddress("ADR_" + i);
+//            list.add(spot);
+//            i++;
+//        }
+//        Map<Integer, IntSummaryStatistics> map =
+//                list.stream().collect(Collectors.groupingBy(Spot::getPlayersNumber, Collectors.summarizingInt(Spot::getPlayersNumber)));
         /**
          * output: summary of this list object, such as "sum", "count"
          * */
-        Map<Integer, IntSummaryStatistics> map =
-                list.stream().collect(Collectors.groupingBy(Spot::getPlayersNumber, Collectors.summarizingInt(Spot::getPlayersNumber)));
-        Jedis jedis = new Jedis();
+
+//        Jedis jedis = new Jedis();
 //
 //        UUID uuid = UUID.randomUUID();
 //        uuid.toString();
