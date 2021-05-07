@@ -1,5 +1,6 @@
 package com.andy.service.business;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,4 +15,7 @@ public class GreenPayServiceImpl implements DonateService{
     public String directUrl() {
         return null;
     }
+
+    @Override
+    public Boolean checkParams(String jsonBody){return null;}
 }

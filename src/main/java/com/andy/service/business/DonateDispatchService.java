@@ -26,4 +26,5 @@ public class DonateDispatchService {
                 throw new ValidateException("no such payment");
         }
     }
+
 }

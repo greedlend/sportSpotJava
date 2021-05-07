@@ -2,6 +2,7 @@ package com.andy.service.business;
 
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
@@ -21,5 +22,6 @@ public class AllpayServiceImpl implements DonateService{
         return null;
     }
 
-    public String checkOrder(){return null;};
+    @Override
+    public Boolean checkParams(String jsonBody){return null;}
 }
