@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * @Author: Lim, Andy
  * @Date: 2020/10/26
@@ -25,13 +27,20 @@ public class Application {
         Class clazz = intArray.getClass();
         System.out.println(clazz.getName()); // [I
 
-        String courtryDiff = "+3";
+        List<SmsMarketNewRuleCountry> listOfRuledCountry =new ArrayList<>();
+        int i = 5;
+        while(i > 0) {
+            SmsMarketNewRuleCountry s = new SmsMarketNewRuleCountry();
+            s.setCountryCode("G"+i);
+            s.setRuleId(i);
+            listOfRuledCountry.add(s);
+            i--;
+        }
 
-        System.out.println(new Date());
-//        TimeZone
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT+3"));
-        System.out.println(sdf.format(new Date()));
+        List<String> listOfStringCountry = listOfRuledCountry.stream().map(rc -> rc.getCountryCode()).collect(toList());
+
+        int stop=0;
+
 
 //        List<Spot> list = new ArrayList<>();
 //        int i = 0;
@@ -58,5 +67,42 @@ public class Application {
 //        jedis.setnx();
 //        jedis.unlink("key");
         SpringApplication.run(Application.class, args);
+    }
+
+    private static String transformToGMTDiff(String sendLocalHour, String nowHour) {
+        Integer sendLocalHourInt = Integer.valueOf(sendLocalHour) == 0 ? 24:Integer.valueOf(sendLocalHour);
+        Integer nowHourInt = Integer.valueOf(nowHour) == 0 ? 24:Integer.valueOf(nowHour);
+
+        Integer sum = sendLocalHourInt - nowHourInt;
+        if(sum > 12) {
+            sum = sum - 24;
+        }else if (sum < -12) {
+            sum = sum + 24;
+        }
+
+        return sum < 0 ? sum.toString() : "+" + sum.toString();
+    }
+
+    public static class SmsMarketNewRuleCountry {
+
+        private Integer ruleId;
+
+        private String countryCode;
+
+        public Integer getRuleId() {
+            return ruleId;
+        }
+
+        public void setRuleId(Integer ruleId) {
+            this.ruleId = ruleId;
+        }
+
+        public String getCountryCode() {
+            return countryCode;
+        }
+
+        public void setCountryCode(String countryCode) {
+            this.countryCode = countryCode == null ? null : countryCode.trim();
+        }
     }
 }
