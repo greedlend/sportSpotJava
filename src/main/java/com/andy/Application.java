@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 import redis.clients.jedis.Jedis;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,22 +23,25 @@ import static java.util.stream.Collectors.toList;
 public class Application {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         int[] intArray = {1, 2, 3};
         Class clazz = intArray.getClass();
         System.out.println(clazz.getName()); // [I
 
-        List<SmsMarketNewRuleCountry> listOfRuledCountry =new ArrayList<>();
-        int i = 5;
-        while(i > 0) {
-            SmsMarketNewRuleCountry s = new SmsMarketNewRuleCountry();
-            s.setCountryCode("G"+i);
-            s.setRuleId(i);
-            listOfRuledCountry.add(s);
-            i--;
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date now = sdf.parse(sdf.format(new Date()));
+        long compateTIme = now.getTime() + 4 * 24 * 60 * 60 * 1000 -1000;
+        now.setTime(compateTIme);
 
-        List<String> listOfStringCountry = listOfRuledCountry.stream().map(rc -> rc.getCountryCode()).collect(toList());
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date target = sdf2.parse("2021-05-24 15:26:22");
+        Long targetTime = target.getTime();
+
+
+        int i = 0;
+
+
+//        List<String> listOfStringCountry = listOfRuledCountry.stream().map(rc -> rc.getCountryCode()).collect(toList());
 
         int stop=0;
 
