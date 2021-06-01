@@ -28,14 +28,9 @@ public class Application {
         Class clazz = intArray.getClass();
         System.out.println(clazz.getName()); // [I
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date now = sdf.parse(sdf.format(new Date()));
-        long compateTIme = now.getTime() + 4 * 24 * 60 * 60 * 1000 -1000;
-        now.setTime(compateTIme);
-
-        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date target = sdf2.parse("2021-05-24 15:26:22");
-        Long targetTime = target.getTime();
+        String orderStateStr = "10,20,30,15_11";
+        List<String> listOfOrderState =
+                Arrays.stream(orderStateStr.split(",")).filter(str -> str.contains("_")).collect(toList());
 
 
         int i = 0;
