@@ -1,0 +1,16 @@
+spring:
+  # Quartz 的配置，對應 QuartzProperties 配置類
+  quartz:
+    job-store-type: memory # Job 儲存器型別。預設為 memory 表示記憶體，可選 jdbc 使用資料庫。
+    auto-startup: true # Quartz 是否自動啟動
+    startup-delay: 0 # 延遲 N 秒啟動
+    wait-for-jobs-to-complete-on-shutdown: true # 應用關閉時，是否等待定時任務執行完成。預設為 false ，建議設定為 true
+    overwrite-existing-jobs: false # 是否覆蓋已有 Job 的配置
+    properties: # 新增 Quartz Scheduler 附加屬性
+      org:
+        quartz:
+          threadPool:
+            threadCount: 25 # 執行緒池大小。預設為 10 。
+            threadPriority: 5 # 執行緒優先順序
+            class: org.quartz.simpl.SimpleThreadPool # 執行緒池型別
+#    jdbc: # 這裡暫時不說明，使用 JDBC 的 JobStore 的時候，才需要配置

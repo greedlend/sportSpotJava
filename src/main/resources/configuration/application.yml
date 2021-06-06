@@ -1,7 +1,7 @@
 spring:
  profiles:
   active: ${profiles.active}
-#  include: db
+  include: quarts
 
 graphql:
  servlet:
