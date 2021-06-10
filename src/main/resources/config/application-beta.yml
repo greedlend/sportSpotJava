@@ -1,0 +1,22 @@
+spring:
+ profiles:
+  active: beta
+  include: db
+ datasource:
+  initialization-mode: always
+  platform: postgres
+  url: jdbc:postgresql://localhost:5432/greedlendTest
+  username: greedlend
+  password: postgres18
+
+ jpa:
+  hibernate:
+   ddl-auto: none
+  properties:
+   hibernate:
+    jdbc:
+     lob:
+      non_contextual_creation: true
+test1026:
+ host: hostbeta
+ name: namebeta

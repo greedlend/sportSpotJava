@@ -137,39 +137,6 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <!--先排除所有的配置文件-->
-                <excludes>
-                    <!--使用通配符，当然可以定义多个exclude标签进行排除-->
-                    <exclude>**/*.yml</exclude>
-                </excludes>
-                <filtering>false</filtering>
-            </resource>
-
-            <resource>
-                <directory>src/main/resources/configuration</directory>
-                <includes>
-                    <include>application.yml</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/resources/configuration/${profiles.active}</directory>
-                <includes>
-                    <include>application-${profiles.active}.yml</include>
-                    <include>application-db.yml</include>
-                    <!--<include>**/*.xml</include>-->
-                    <!--<include>**/*.properties</include>-->
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
-
-<!--        <filters>-->
-<!--            <filter>src/main/resources/configuration/${profiles.active}/application-${profiles.active}.yml</filter>-->
-<!--        </filters>-->
 
         <plugins>
             <plugin>
@@ -190,34 +157,34 @@
 
     </build>
 
-    <profiles>
-        <profile>
-            <!--	开发环境		-->
-            <id>dev</id>
-            <properties>
-                <profiles.active>dev</profiles.active>
-            </properties>
-            <!--	默认激活的环境		-->
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <!--	测试环境		-->
-            <id>beta</id>
-            <properties>
-                <profiles.active>beta</profiles.active>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <!--	生产环境		-->
-            <id>prod</id>
-            <properties>
-                <profiles.active>prod</profiles.active>
-            </properties>
-        </profile>
-    </profiles>
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            &lt;!&ndash;	开发环境		&ndash;&gt;-->
+<!--            <id>dev</id>-->
+<!--            <properties>-->
+<!--                <profiles.active>dev</profiles.active>-->
+<!--            </properties>-->
+<!--            &lt;!&ndash;	默认激活的环境		&ndash;&gt;-->
+<!--            <activation>-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
+<!--        </profile>-->
+<!--        <profile>-->
+<!--            &lt;!&ndash;	测试环境		&ndash;&gt;-->
+<!--            <id>beta</id>-->
+<!--            <properties>-->
+<!--                <profiles.active>beta</profiles.active>-->
+<!--            </properties>-->
+<!--            <activation>-->
+<!--                <activeByDefault>false</activeByDefault>-->
+<!--            </activation>-->
+<!--        </profile>-->
+<!--        <profile>-->
+<!--            &lt;!&ndash;	生产环境		&ndash;&gt;-->
+<!--            <id>prod</id>-->
+<!--            <properties>-->
+<!--                <profiles.active>prod</profiles.active>-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--    </profiles>-->
 </project>
