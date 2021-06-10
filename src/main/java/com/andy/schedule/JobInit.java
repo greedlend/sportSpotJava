@@ -8,6 +8,11 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+/**
+ * 安排定時任務
+ * 1.啟用/停用
+ * 2.定時時間
+ * */
 @Component
 public class JobInit implements ApplicationRunner {
 
