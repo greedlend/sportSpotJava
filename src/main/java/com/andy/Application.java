@@ -1,6 +1,7 @@
 package com.andy;
 
 import com.andy.model.Spot;
+//import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
+//import org.apache.commons.
 
 /**
  * @Author: Lim, Andy
@@ -28,14 +30,11 @@ public class Application {
         Class clazz = intArray.getClass();
         System.out.println(clazz.getName()); // [I
 
-        String orderStateStr = "10,20,30,15_11";
-        List<String> listOfOrderState =
-                Arrays.stream(orderStateStr.split(",")).filter(str -> str.contains("_")).collect(toList());
-
-
-        int i = 0;
-
-
+//        String salt = "a1ee3a0fa9ea4365cdbc8790276c6a956bb7023a";
+//        String password = "ZWUN9389";
+//        String name = "Ryuzaki.Chang";
+//
+//        String sha512Password = DigestUtils.sha512Hex(salt+password+ name);
 //        List<String> listOfStringCountry = listOfRuledCountry.stream().map(rc -> rc.getCountryCode()).collect(toList());
 
         int stop=0;
