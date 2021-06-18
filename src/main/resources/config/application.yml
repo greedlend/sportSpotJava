@@ -2,6 +2,23 @@ spring:
  profiles:
   active: ${profiles.active}
   include: quarts
+ freemarker:
+  cache: false
+  # 模版後綴名 默認為ftl
+  suffix: .html
+  # 文件編碼
+  charset: UTF-8
+  # 模版加載的目錄
+  template-loader-path: classpath:/templates/
+  # 配置
+  # locale 該選項指定該模板所用的國家/語言選項
+  # number_format 指定格式化輸出數字的格式：currency、
+  # boolean_format 指定兩個布爾值的語法格式,默認值是true,false
+  # date_format,time_format,datetime_format 定格式化輸出日期的格式
+  # time_zone 設置格式化輸出日期時所使用的時區
+  # 數字 千分位標識
+  settings:
+   number_format: ",##0.00"
 
 graphql:
  servlet:
@@ -40,3 +57,6 @@ graphql.playground:
    responses:
 #   - classpath:graphQL/exampleResponse1.json
 #   - classpath:graphQL/exampleResponse2.json
+
+# 緩存配置 開發階段應該配置為false 因為經常會改
+
