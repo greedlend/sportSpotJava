@@ -131,6 +131,6 @@ public class SpotController {
             return new ResponseEntity<>("Punch wrongly, plz check the requested parameters. " + validateException.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity("successful", HttpStatus.OK);
     }
 }
