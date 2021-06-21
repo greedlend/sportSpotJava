@@ -4,11 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.slf4j.MDC;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 @Aspect
 @Order(-99) // 控制多個Aspect的執行順序，越小越先執行
@@ -31,9 +34,19 @@ public class MonitorAOP {
     //@Pointcut("execution(public * com.andy.controller.SpotController.*(..))")
 
 
-    @Before("Pointcut()") public void beforeMethod(JoinPoint joinPoint){ log.info("調用了前置通知"); }
+    @Before("Pointcut()")
+    public void beforeMethod(JoinPoint joinPoint){
+        log.info("調用了前置通知");
+        if (MDC.get("traceId") == null) {
+            MDC.put("traceId", UUID.randomUUID().toString());
+        }
+    }
 
-    @AfterReturning(value="Pointcut()",returning="result") public void afterReturningMethod(JoinPoint joinPoint, Object result){ log.info("調用了返回通知"); }
+    @AfterReturning(value="Pointcut()",returning="result")
+    public void afterReturningMethod(JoinPoint joinPoint, Object result){
+        log.info("調用了返回通知");
+        MDC.clear();
+    }
 
     @AfterThrowing(value="Pointcut()",throwing="e") public void afterReturningMethod(JoinPoint joinPoint, Exception e){ log.info("調用了異常通知"); }
 

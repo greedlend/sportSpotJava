@@ -122,6 +122,7 @@ public class SpotController {
             @RequestParam(value = "spotUuid", required = true) String uuid,
             @RequestParam(value = "playersNumber",required = true) Integer playersNumber) {
 
+        log.info("updates players");
         try {
             spotService.punchSpot(uuid, playersNumber);
         }catch (Exception validateException) {
