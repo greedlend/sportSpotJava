@@ -7,8 +7,8 @@
     <!-- ConsoleAppender：把日志输出到控制台 -->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <!-- <pattern>%d %p %thread (%file:%line\)- %m%n</pattern>  -->
-            <pattern>%d %p %thread %X{traceId} (%file:%line\)- %m%n</pattern>
+            <!-- <pattern>%d %p %thread (%F:%L\)- %m%n</pattern>  -->
+            <pattern>%d{dd MMM yyyy;HH:mm:ss.SSS} %highlight(%p) %thread %cyan(%X{traceId}) (%file:%line\)- %m%n</pattern>
             <!-- 控制台也要使用UTF-8，不要使用GBK，否则会中文乱码 -->
             <charset>UTF-8</charset>
         </encoder>
