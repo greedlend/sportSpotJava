@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
     <!-- 指定連線資料庫時所需要的JDBC driver的檔案位置 -->
-    <classPathEntry location="D:\mavenRepository\org\postgresql\postgresql\42.2.19\postgresql-42.2.19.jar" />
+    <classPathEntry location="C:\Users\user\.m2\repository\org\postgresql\postgresql\42.2.19\postgresql-42.2.19.jar" />
     <context id="my" targetRuntime="MyBatis3">
 
         <commentGenerator>
@@ -21,22 +21,22 @@
 
         <!-- 要產生的model位置，targetProject的值為專案的Source folder，所以是gm/src/main/java -->
         <javaModelGenerator
-                targetPackage="com.andy.mybatis"
-                targetProject="D:\workspace\sportSpotJava\src\main\java">
+                targetPackage="com.andy.mybatis.model"
+                targetProject="D:\workspace\git_workspace\sportSpotJava\src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!-- 要產生的MyBatis Mapper位置 -->
-        <sqlMapGenerator targetPackage="com.andy.mybatis.mapper"
-                         targetProject="D:\workspace\sportSpotJava\src\main\java">
+        <sqlMapGenerator targetPackage="mybatis.mapper"
+                         targetProject="D:\workspace\git_workspace\sportSpotJava\src\main\resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
-        <!-- 要產生的MyBatis Dao位置 -->
+        <!-- 要產生的java mapper位置 -->
         <javaClientGenerator
                 targetPackage="com.andy.mybatis.mapper"
-                targetProject="D:\workspace\sportSpotJava\src\main\java" type="XMLMAPPER">
+                targetProject="D:\workspace\git_workspace\sportSpotJava\src\main\java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
