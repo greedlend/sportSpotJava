@@ -21,6 +21,9 @@ public class BaseConfiguration {
     @Value("${test1026.name}")
     private String name;
 
+    @Value("${test1026.password}")
+    private String password;
+
     @Value("${spring.datasource.url}")
     private String dbUrl;
 
@@ -46,5 +49,13 @@ public class BaseConfiguration {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

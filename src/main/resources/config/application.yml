@@ -60,3 +60,7 @@ graphql.playground:
 
 # 緩存配置 開發階段應該配置為false 因為經常會改
 
+jasypt:
+ encryptor:
+  password: hyTEch$@160332
+

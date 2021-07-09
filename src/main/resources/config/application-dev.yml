@@ -18,3 +18,4 @@ spring:
 test1026:
  host: hostdev
  name: namedev
+ password: ENC(cdVQBnJMAI47mDGyUNMU4x5F6aM1zKO0u8Bxs2BdR91uHv8TiP+kNzCw3g7sDeVO)
