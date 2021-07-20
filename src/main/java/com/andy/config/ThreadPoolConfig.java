@@ -1,30 +1,32 @@
 package com.andy.config;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
-@ConfigurationProperties(prefix = "self.execution.pool")
+//@ConfigurationProperties(prefix = "self.execution.pool")
 public class ThreadPoolConfig {
 
-    private int coreSize;
+    @Value("${self.execution.pool.core-size}")
+    private Integer coreSize;
 
-    private int maxSize;
+    @Value("${self.execution.pool.max-size}")
+    private Integer maxSize;
 
-    private int keepAliveSeconds;
+    @Value("${self.execution.pool.keep-alive-seconds}")
+    private Integer keepAliveSeconds;
 
-    private int queueCapacity;
+    @Value("${self.execution.pool.queue-capacity}")
+    private Integer queueCapacity;
 
-    private boolean allowCoreThreadTimeout;
+    @Value("${self.execution.pool.allow-core-thread-timeout}")
+    private Boolean allowCoreThreadTimeout;
 
-//    @Value("spring.task.execution.thread-name-prefix")
-//    private String threadNamePrefix;
+    @Value("${self.execution.thread-name-prefix}")
+    private String threadNamePrefix;
 
     @Bean("definedThreadExecutor")
     public ThreadPoolTaskExecutor getExecutor() {
@@ -33,7 +35,7 @@ public class ThreadPoolConfig {
         System.out.println("keepAliveSeconds" + keepAliveSeconds);
         System.out.println("queueCapacity" + queueCapacity);
         System.out.println("allowCoreThreadTimeout" + allowCoreThreadTimeout);
-//        System.out.println("threadNamePrefix" + threadNamePrefix);
+        System.out.println("threadNamePrefix" + threadNamePrefix);
 
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
         threadPoolTaskExecutor.setCorePoolSize(coreSize);
@@ -41,7 +43,7 @@ public class ThreadPoolConfig {
         threadPoolTaskExecutor.setKeepAliveSeconds(keepAliveSeconds);
         threadPoolTaskExecutor.setQueueCapacity(queueCapacity);
         threadPoolTaskExecutor.setAllowCoreThreadTimeOut(allowCoreThreadTimeout);
-//        threadPoolTaskExecutor.setThreadNamePrefix(threadNamePrefix);
+        threadPoolTaskExecutor.setThreadNamePrefix(threadNamePrefix);
         return threadPoolTaskExecutor;
     }
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
 
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @Author: Lim, Andy
@@ -39,6 +41,9 @@ public class SpotController {
 
     @Autowired
     private SpotService spotService;
+
+//    @Autowired
+//    ThreadPoolTaskExecutor definedThreadExecutor;
 
     /**
      *
@@ -97,13 +102,13 @@ public class SpotController {
         HttpSession session = httpServletRequest.getSession();
 
         session.getAttribute("test");
-        String redisPunchKey = punchKey + uuid;
-        Jedis jedis = new Jedis();
-        if(null == jedis.get(redisPunchKey)) {
-            jedis.setex(redisPunchKey, 10, Integer.toString(playersNumber));
-        }else {
-            return new ResponseEntity<>("This Spot has been punched within 10 sec, plz hold, or just update this Spot.", HttpStatus.ACCEPTED);
-        }
+//        String redisPunchKey = punchKey + uuid;
+//        Jedis jedis = new Jedis();
+//        if(null == jedis.get(redisPunchKey)) {
+//            jedis.setex(redisPunchKey, 10, Integer.toString(playersNumber));
+//        }else {
+//            return new ResponseEntity<>("This Spot has been punched within 10 sec, plz hold, or just update this Spot.", HttpStatus.ACCEPTED);
+//        }
 
         try {
             spotService.punchSpot(uuid, playersNumber);
@@ -123,6 +128,22 @@ public class SpotController {
             @RequestParam(value = "playersNumber",required = true) Integer playersNumber) {
 
         log.info("updates players");
+
+        String now = "aaa";
+        Spot spot = new Spot();
+        spot.setAddress("address");
+
+//        definedThreadExecutor.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                log.info("test for scoped object: " + now);
+//                log.info("test for scoped object: " + now.toLowerCase());
+//                log.info("test for scoped object: " + spot.getAddress());
+//
+//            }
+//        });
+
         try {
             spotService.punchSpot(uuid, playersNumber);
         }catch (Exception validateException) {

@@ -25,7 +25,7 @@ self:
    allow-core-thread-timeout: true
    core-size: 10
    max-size: 50
-   keep-alive-Seconds: 60
+   keep-alive-seconds: 60
    queue-capacity: 100
   thread-name-prefix: "線成執行中"
 
