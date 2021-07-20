@@ -42,8 +42,8 @@ public class SpotController {
     @Autowired
     private SpotService spotService;
 
-//    @Autowired
-//    ThreadPoolTaskExecutor definedThreadExecutor;
+    @Autowired
+    ThreadPoolTaskExecutor definedThreadExecutor;
 
     /**
      *
@@ -133,16 +133,16 @@ public class SpotController {
         Spot spot = new Spot();
         spot.setAddress("address");
 
-//        definedThreadExecutor.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                log.info("test for scoped object: " + now);
-//                log.info("test for scoped object: " + now.toLowerCase());
-//                log.info("test for scoped object: " + spot.getAddress());
-//
-//            }
-//        });
+        definedThreadExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                log.info("test for scoped object: " + now);
+                log.info("test for scoped object: " + now.toLowerCase());
+                log.info("test for scoped object: " + spot.getAddress());
+
+            }
+        });
 
         try {
             spotService.punchSpot(uuid, playersNumber);
