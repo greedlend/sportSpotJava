@@ -19,6 +19,15 @@ spring:
   # 數字 千分位標識
   settings:
    number_format: ",##0.00"
+self:
+ execution:
+  pool:
+   allow-core-thread-timeout: true
+   core-size: 10
+   max-size: 50
+   keep-alive-Seconds: 60
+   queue-capacity: 100
+  thread-name-prefix: "線成執行中"
 
 graphql:
  servlet:
