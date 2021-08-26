@@ -19,7 +19,6 @@ import java.util.UUID;
 @Slf4j
 public class MonitorAOP {
 
-
     // controller及其子包中所有的類的所有方法切面
     @Pointcut("execution(public * com.andy.controller..*.*(..))")
     public void Pointcut() {
@@ -65,11 +64,11 @@ public class MonitorAOP {
         //獲取目標類方法名稱
         String methodName = pjp.getSignature().getName();
         //記錄類名稱
-        data.put("clazzName",clazzName);
+        data.put("clazzName", clazzName);
         //記錄對應方法名稱
-        data.put("methodName",methodName);
+        data.put("methodName", methodName);
         //記錄請求參數
-        data.put("params",pjp.getArgs());
+        data.put("params", pjp.getArgs());
         //開始調用時間 // 計時並調用目標函數
         long start = System.currentTimeMillis();
         Object result = pjp.proceed();
