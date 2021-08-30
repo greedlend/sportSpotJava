@@ -3,7 +3,7 @@ package com.andy.service.business;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("greenpay")
 public class GreenPayServiceImpl implements DonateService{
 
     @Override

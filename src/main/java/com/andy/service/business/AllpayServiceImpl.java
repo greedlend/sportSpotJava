@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.logging.Logger;
 
 @Slf4j
-@Service
+@Service("allpay")
 public class AllpayServiceImpl implements DonateService{
 
     @Override
