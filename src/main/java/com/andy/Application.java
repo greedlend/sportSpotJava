@@ -1,7 +1,9 @@
 package com.andy;
 
-import com.andy.model.Spot;
+//import com.andy.model.Spot;
 //import org.apache.commons.codec.digest.DigestUtils;
+
+import kotlin.reflect.jvm.internal.impl.name.NameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +13,8 @@ import redis.clients.jedis.Jedis;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -37,21 +41,24 @@ public class Application {
 //        String sha512Password = DigestUtils.sha512Hex(salt+password+ name);
 //        List<String> listOfStringCountry = listOfRuledCountry.stream().map(rc -> rc.getCountryCode()).collect(toList());
 
+//        int a = NameUtils.printInt();
+        Map<String, String> map =new HashMap<>();
+        map.put("signName", "VanFx");
+        map.put("userName", "Ann");
+        String aa = "Salute, ${signName} provide you a better price，hope ${userName} would evaluate it.";
+
+        String regStr = "\\$\\{(signName)\\}";
+        Pattern pattern = Pattern.compile(regStr);
+
+        for (String key: map.keySet()) {
+            String ak = "\\$\\{("+ key + ")\\}";
+            aa = aa.replaceAll(ak, map.get(key));
+        }
+
         int stop=0;
 
 
-//        List<Spot> list = new ArrayList<>();
-//        int i = 0;
-//        while(i<5) {
-//            int a = i%2;
-//            Spot spot = new Spot();
-//            spot.setPlayersNumber(a);
-//            spot.setAddress("ADR_" + i);
-//            list.add(spot);
-//            i++;
-//        }
-//        Map<Integer, IntSummaryStatistics> map =
-//                list.stream().collect(Collectors.groupingBy(Spot::getPlayersNumber, Collectors.summarizingInt(Spot::getPlayersNumber)));
+
         /**
          * output: summary of this list object, such as "sum", "count"
          * */
