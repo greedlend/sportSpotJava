@@ -1,5 +1,7 @@
 package com.andy.service.business;
 
+import com.andy.model.RequestGateway;
+import com.andy.model.ResponseGateway;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
@@ -24,4 +26,9 @@ public class AllpayServiceImpl implements DonateService{
 
     @Override
     public Boolean checkParams(String jsonBody){return null;}
+
+    @Override
+    public ResponseGateway send(RequestGateway requestGateway) {
+        return null;
+    }
 }
