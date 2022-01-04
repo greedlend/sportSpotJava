@@ -1,16 +1,29 @@
 package com.andy;
 
-import com.andy.model.Spot;
+//import com.andy.model.Spot;
 //import org.apache.commons.codec.digest.DigestUtils;
+
+import kotlin.reflect.jvm.internal.impl.name.NameUtils;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 import redis.clients.jedis.Jedis;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -30,6 +43,29 @@ public class Application {
         Class clazz = intArray.getClass();
         System.out.println(clazz.getName()); // [I
 
+
+        String dateStr = "2021-11-04";
+        String timeStr = "22:00";
+        SimpleDateFormat sdf = new SimpleDateFormat();
+//        sdf.setTimeZone(TimeZone.getTimeZone("CST"));
+        sdf.applyPattern("yyyy-MM-ddHH:mm");
+
+        Date date = sdf.parse(dateStr+timeStr);
+
+
+        Calendar cal = Calendar.getInstance();
+//        cal.setTimeZone(TimeZone.getTimeZone("GMT"));
+        cal.setTime(date);
+
+
+
+        SimpleDateFormat sdf2 = new SimpleDateFormat();
+        sdf2.applyPattern("yyyy-MM-ddHH:mm");
+        sdf2.setTimeZone(TimeZone.getTimeZone("GMT"));
+
+        String saa = sdf2.format(date);
+
+        int a =1;
 //        String salt = "a1ee3a0fa9ea4365cdbc8790276c6a956bb7023a";
 //        String password = "ZWUN9389";
 //        String name = "Ryuzaki.Chang";
@@ -37,21 +73,24 @@ public class Application {
 //        String sha512Password = DigestUtils.sha512Hex(salt+password+ name);
 //        List<String> listOfStringCountry = listOfRuledCountry.stream().map(rc -> rc.getCountryCode()).collect(toList());
 
+//        int a = NameUtils.printInt();
+        Map<String, String> map =new HashMap<>();
+        map.put("signName", "VanFx");
+        map.put("userName", "Ann");
+        String aa = "Salute, ${signName} provide you a better price，hope ${userName} would evaluate it.";
+
+        String regStr = "(\\$\\{\\w*\\})";
+        for (String key: map.keySet()) {
+            String ak = "\\$\\{("+ key + ")\\}";
+            aa = aa.replaceAll(regStr, map.get(key));
+        }
+
+
+
         int stop=0;
 
 
-//        List<Spot> list = new ArrayList<>();
-//        int i = 0;
-//        while(i<5) {
-//            int a = i%2;
-//            Spot spot = new Spot();
-//            spot.setPlayersNumber(a);
-//            spot.setAddress("ADR_" + i);
-//            list.add(spot);
-//            i++;
-//        }
-//        Map<Integer, IntSummaryStatistics> map =
-//                list.stream().collect(Collectors.groupingBy(Spot::getPlayersNumber, Collectors.summarizingInt(Spot::getPlayersNumber)));
+
         /**
          * output: summary of this list object, such as "sum", "count"
          * */

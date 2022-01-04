@@ -1,6 +1,7 @@
 package com.andy.controller;
 
 import com.andy.exceptions.ValidateException;
+import com.andy.model.RequestGatewayGreen;
 import com.andy.service.business.DonateDispatchService;
 import com.andy.service.business.DonateService;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,10 @@ public class DonateController {
         DonateService donateService;
         try {
             donateService = donateDispatchService.getServiceByProvider(provider);
+            RequestGatewayGreen aa = new RequestGatewayGreen();
+            aa.setAmount(1);
+            aa.setBrandName("Green");
+            donateService.send(aa);
         } catch(ValidateException e) {
             log.error(e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
