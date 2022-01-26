@@ -5,5 +5,7 @@ import lombok.Data;
 @Data
 public class ResponseGateway {
 
-    private Integer status;
+    private Integer statusCode;
+
+    private String info;
 }
