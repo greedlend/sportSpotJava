@@ -1,0 +1,6 @@
+message{
+    string aa:1
+    uint32 bb:2
+    uint32 cc:3
+
+}
