@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 @Service("greenpay")
 public class GreenPayServiceImpl implements DonateService{
 
+    private final String greenpayUrl = "https://greenpay";
+
     @Override
     public String htmlMethod() {
         return "this green payment";
@@ -16,7 +18,7 @@ public class GreenPayServiceImpl implements DonateService{
 
     @Override
     public String directUrl() {
-        return null;
+        return greenpayUrl;
     }
 
     @Override
@@ -25,6 +27,9 @@ public class GreenPayServiceImpl implements DonateService{
     @Override
     public ResponseGateway send(RequestGateway requestGateway) {
 
+//        String jsonResponse = greenpay.send(requestGateway);
+
+        ResponseGateway rg = new ResponseGateway();
         return null;
     }
 }

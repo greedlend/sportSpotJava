@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ListCategory {
 
-    public List getList(List<Object> list) {
+    public List toUnmodifiableList(List<Object> list) {
         //unmodificable list
         list = Collections.unmodifiableList(list);
         return list;
