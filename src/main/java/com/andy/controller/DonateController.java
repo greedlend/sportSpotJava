@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,10 +47,10 @@ public class DonateController {
         DonateService donateService;
         try {
             donateService = donateDispatchService.getServiceByProvider(provider);
-//            RequestGatewayGreen aa = new RequestGatewayGreen();
-//            aa.setAmount(1);
-//            aa.setBrandName("Green");
-//            donateService.send(aa);
+            RequestGatewayGreen aa = new RequestGatewayGreen();
+            aa.setAmount(BigDecimal.valueOf(1));
+            aa.setBrandName("Green");
+            donateService.send(aa);
         } catch(ValidateException e) {
             log.error(e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);

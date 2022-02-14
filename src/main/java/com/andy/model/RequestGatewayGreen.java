@@ -5,13 +5,14 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class RequestGatewayGreen{
+//@No
+public class RequestGatewayGreen extends RequestGateway{
 
     private String brandName;
 
-    private BigDecimal amount;
+//    private BigDecimal amount;
 
-    RequestGatewayGreen(RequestGateway rg) {
-        this.amount =rg.getAmount();
-    }
+//    public RequestGatewayGreen(RequestGateway rg) {
+//        this.amount =rg.getAmount();
+//    }
 }
