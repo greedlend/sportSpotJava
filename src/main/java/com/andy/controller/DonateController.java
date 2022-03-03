@@ -51,14 +51,13 @@ public class DonateController {
             aa.setAmount(BigDecimal.valueOf(1));
             aa.setBrandName("Green");
             donateService.send(aa);
+
+            String pageHtml = donateService.htmlMethod();
+            return new ResponseEntity(pageHtml, HttpStatus.OK);
         } catch(ValidateException e) {
             log.error(e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
-
-        String pageHtml = donateService.htmlMethod();
-
-        return new ResponseEntity(pageHtml, HttpStatus.OK);
     }
 
     @RequestMapping(value="submitPay", method = RequestMethod.POST)
