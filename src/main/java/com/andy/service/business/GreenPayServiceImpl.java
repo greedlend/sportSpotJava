@@ -3,6 +3,7 @@ package com.andy.service.business;
 import com.andy.model.RequestGateway;
 import com.andy.model.RequestGatewayGreen;
 import com.andy.model.ResponseGateway;
+import com.google.gson.Gson;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,12 @@ public class GreenPayServiceImpl implements DonateService{
     }
 
     @Override
-    public Boolean checkParams(String jsonBody){return null;}
+    public Boolean checkParams(String jsonBody){
+        Gson gson = new Gson();
+        JSONObject jo = gson.fromJson(jsonBody, JSONObject.class);
+        //todo:
+        return true;
+    }
 
     @Override
     public ResponseGateway send(RequestGateway requestGateway) {
