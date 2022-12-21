@@ -48,7 +48,7 @@ public class DonateController {
         try {
             donateService = donateDispatchService.getServiceByProvider(provider);
             RequestGatewayGreen aa = new RequestGatewayGreen();
-            aa.setAmount(BigDecimal.valueOf(1));
+            aa.setAmount(BigDecimal.valueOf(1222));
             aa.setBrandName("Green");
             donateService.send(aa);
 
