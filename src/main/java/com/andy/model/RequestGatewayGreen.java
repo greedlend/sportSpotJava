@@ -12,8 +12,4 @@ public class RequestGatewayGreen extends RequestGateway{
     private String brandName;
 
     private BigDecimal amount;
-
-    public RequestGatewayGreen(RequestGateway rg) {
-        this.amount =rg.getAmount();
-    }
 }
